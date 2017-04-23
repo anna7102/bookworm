@@ -1,0 +1,50 @@
+<?php
+$title = "Mes livres";
+$this->headTitle($title);
+?>
+<h1>Livres que j'ai lus</h1>
+
+<p>
+    <a href="<?php echo $this->url('book',
+        array('action' => 'add')); ?>">
+        Ajouter un nouveau livre
+    </a>
+</p>
+
+<table class="table table-responsive table-bordered">
+    <tr>
+        <th>Titre</th>
+        <th>Auteur</th>
+        <th>Actions</th>
+    </tr>
+
+    <?php foreach ($this->paginator as $book) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($book->title); ?></td>
+        <td><?php echo $this->escapeHtml($book->author); ?></td>
+        <td>
+            <a href="<?php echo $this->url('book',
+                array('action' => 'edit', 'id' => $book->id)); ?>">
+                Modifier
+            </a>
+            <a href="<?php echo $this->url('book',
+                array('action' => 'delete', 'id' => $book->id)); ?>">
+                Supprimer
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+
+</table>
+<?php
+echo $this->paginationControl(
+        $this->paginator,
+        'sliding',
+        array(
+                'partial/paginator.phtml', 'Book'
+        ),
+        array(
+                'route' => 'book'
+        )
+);
+?>

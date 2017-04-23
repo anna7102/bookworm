@@ -1,0 +1,43 @@
+<?php
+$title = "Ajouter un nouveau livre";
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('book', array(
+    'action' => 'add'
+)));
+
+
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+
+?>
+<div class="col-xs-12">
+<?php
+echo $this->formRow($form->get('title'));
+    ?>
+    </div>
+<?php
+?>
+<div class="col-xs-12">
+<?php
+echo $this->formRow($form->get('author'));
+?>
+</div>
+<?php
+?>
+<div class="col-xs-12" style="padding-bottom: 30px;">
+<?php
+echo $this->formSubmit($form->get('submit'));
+?>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>
